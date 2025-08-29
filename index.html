@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AI Context Curator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <select id="workspace-selector">
+        <option value="newsplanet">PROJECT: NewsplanetAI</option>
+      </select>
+      <div style="margin-top: 5px;">
+        <button onclick="expandAll()" style="padding: 4px 8px; font-size: 12px;">Expand All</button>
+        <button onclick="collapseAll()" style="padding: 4px 8px; font-size: 12px;">Collapse All</button>
+      </div>
+    </header>
+
+    <div class="cells-container">
+      <div class="cell main-prompt-cell" id="main-prompt-cell">
+        <div class="cell-header">
+          <button class="collapse-btn" onclick="toggleMainPrompt()">▼</button>
+          <input type="checkbox" id="main-checkbox" checked>
+          <span class="cell-title">📌 MAIN PROMPT (pinned)</span>
+          <span class="cell-preview" id="main-prompt-preview" style="display: none;"></span>
+        </div>
+        <div class="cell-body" id="main-prompt-body">
+          <div class="cell-content" id="main-prompt-content">
+            Click to set main prompt...
+          </div>
+        </div>
+      </div>
+
+      <div id="cells-list"></div>
+    </div>
+
+    <div class="controls">
+      <button id="add-cell-btn">+ Add Cell</button>
+      <button id="copy-btn">Copy Selected</button>
+      <button id="clear-btn">Clear Selection</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

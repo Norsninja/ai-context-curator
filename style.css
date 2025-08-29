@@ -22,13 +22,19 @@ header {
   margin-bottom: 10px;
 }
 
-#workspace-selector {
+#project-selector {
   width: 100%;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
   background: white;
+  cursor: pointer;
+}
+
+#project-selector option[disabled] {
+  color: #999;
+  font-size: 12px;
 }
 
 .cells-container {

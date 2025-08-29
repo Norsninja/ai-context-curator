@@ -8,9 +8,12 @@
 <body>
   <div class="container">
     <header>
-      <select id="workspace-selector">
-        <option value="newsplanet">PROJECT: NewsplanetAI</option>
-      </select>
+      <div style="display: flex; align-items: center; gap: 5px;">
+        <select id="project-selector" style="flex: 1;">
+          <!-- Projects will be populated by JavaScript -->
+        </select>
+        <button onclick="deleteProject()" title="Delete Current Project" style="padding: 6px 10px; font-size: 14px;">🗑</button>
+      </div>
       <div style="margin-top: 5px;">
         <button onclick="expandAll()" style="padding: 4px 8px; font-size: 12px;">Expand All</button>
         <button onclick="collapseAll()" style="padding: 4px 8px; font-size: 12px;">Collapse All</button>
@@ -42,6 +45,6 @@
     </div>
   </div>
 
-  <script src="renderer.js"></script>
+  <script src="renderer-v2.js"></script>
 </body>
 </html>

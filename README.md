@@ -77,14 +77,49 @@ Select both → Copy → Paste in AI chat → Full context restored!
 - **Keyboard shortcuts** - Enter to save, Escape to cancel
 - **Local storage** - Your data stays on your machine
 
+## The Handoff Workflow
+
+This tool is part of a comprehensive handoff system for AI collaboration. Here's how it works:
+
+### 1. The Handoff Template
+Each project has a standardized handoff template (`project/templates/HANDOFF_TEMPLATE.md`) that captures:
+- Critical context and current status
+- What was accomplished vs what's in progress
+- Known issues and next steps
+- Technical details and file changes
+- Progress metrics and session notes
+
+### 2. Claude Code Integration
+When ending a session, use the `/handoff` command in Claude Code to:
+- Generate a structured handoff document from the template
+- Automatically capture session context and accomplishments
+- Save it to your `project/handoffs/` directory with timestamp
+
+### 3. Context Curator Workflow
+1. **Main Prompt**: Your standard AI greeting and collaboration guidelines
+2. **Handoff Cell**: Paste the latest handoff for immediate context
+3. **Supporting Cells**: Add project status, research notes, or specific focus areas
+4. **Copy & Start**: Select relevant cells and paste to begin with full context
+
+### Example Session Flow
+```
+Morning Session:
+├── Start with Context Curator → Copy main prompt + yesterday's handoff
+├── Work with Claude on feature implementation
+├── End with `/handoff` command → Creates HANDOFF_20250830_FeatureComplete.md
+└── Save handoff to Context Curator for tomorrow
+
+Next Session:
+├── Open Context Curator → Previous handoff ready
+├── Copy context → Paste to Claude
+└── Claude immediately understands where you left off
+```
+
+This creates seamless continuity across sessions, ensuring no context is lost and every session builds on the previous work.
+
 ## Why This Exists
 
-After losing context repeatedly between AI sessions, I built this to maintain continuity. It follows a simple workflow:
-1. Start each session with your main prompt
-2. Include relevant handoff context
-3. AI has full understanding from message one
-
-It's basically a clipboard manager optimized for AI session management.
+After losing context repeatedly between AI sessions, I built this to maintain continuity. It's basically a clipboard manager optimized for AI session management, designed to work hand-in-hand with structured handoffs.
 
 ## Data Location
 

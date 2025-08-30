@@ -1,40 +1,220 @@
-# AI Context Curator
+# The Handoff Methodology for AI Collaboration
 
-A lightweight clipboard manager for maintaining session continuity with AI assistants. Built for developers who want consistent context across AI conversations.
+> A systematic approach to maintaining context and continuity across AI coding sessions, with tools to support the workflow.
 
 <div align="center">
   
-### [⬇️ Download Latest Release](https://github.com/Norsninja/ai-context-curator/releases/latest)
+### [⬇️ Download Context Curator App](https://github.com/Norsninja/ai-context-curator/releases/latest)
 **Windows • Mac • Linux**
 
 </div>
 
-## What It Is
+## The Problem We're Solving
 
-A simple tool to manage your AI session context. Keep your main prompt and session handoffs organized, then copy them together to start each AI conversation with full context.
+Every AI coding session starts with amnesia. Your AI assistant has no memory of:
+- What you built yesterday
+- Why you made certain decisions  
+- What's currently broken
+- Where you left off
 
-## How It Works
+This leads to:
+- Repeated explanations
+- Contradictory suggestions
+- Wasted context window
+- Lost momentum
 
-1. **Main Prompt** - Your standard greeting/instructions that you use every session
-2. **Context Cells** - Add handoff messages, project status, or any context you need
-3. **Copy & Paste** - Select what you need and paste into your AI chat
+## The Methodology: Structured Handoffs
 
-That's it. No complicated features, just a clean way to manage AI session continuity.
+After hundreds of AI pair programming sessions, I've developed a systematic approach that creates **true continuity** between sessions. It's not about building complex memory systems - it's about disciplined knowledge transfer.
 
-## Screenshots
+### Core Principles
 
-### Your projects and context organized
+1. **Context Before Code** - Never start coding cold. Always review context together first.
+2. **Research Before Implementation** - Understand the problem space before writing solutions.
+3. **Handoffs Are Mandatory** - Every session ends with a structured handoff, no exceptions.
+4. **New Ideas = New Sessions** - Never pivot after using 50%+ of context window.
+5. **Document As You Go** - Update sprint.md and docs during work, not after.
+
+### The Session Flow
+
+```
+Session Start:
+├── Load context (main prompt + handoff)
+├── AI reviews and acknowledges understanding
+├── Discuss what was learned
+├── Research if needed
+├── Create plan
+└── Begin implementation
+
+Session End:
+├── Complete current task (don't leave things half-done)
+├── Generate handoff with `/handoff` command
+├── Save handoff to project directory
+└── Update Context Curator for next session
+```
+
+## Implementing The Methodology
+
+### Option 1: Simple File-Based System (No Tools Required)
+
+Create this structure in your project:
+```
+your-project/
+├── project/
+│   ├── handoffs/
+│   │   ├── HANDOFF_20250830_FeatureComplete.md
+│   │   └── HANDOFF_20250829_BugFixSession.md
+│   └── templates/
+│       └── HANDOFF_TEMPLATE.md
+├── sprint.md         # Current tasks and priorities
+└── MAIN_PROMPT.md    # Your standard AI greeting
+```
+
+**Workflow:**
+1. Start each session by copying MAIN_PROMPT.md + latest handoff
+2. Paste into AI chat
+3. Work through your sprint.md tasks
+4. Before context window fills, create new handoff
+5. Save to handoffs directory with date
+
+**Handoff Template:** Copy from [project/templates/HANDOFF_TEMPLATE.md](project/templates/HANDOFF_TEMPLATE.md)
+
+### Option 2: Context Curator App (Streamlined Workflow)
+
+The Context Curator app streamlines this process:
+
 ![Expanded view showing main prompt and context cells](images/screenshot-expanded.jpg)
 
-### Multiple projects, collapsed view  
-![Collapsed view showing multiple projects](images/screenshot-collapsed.jpg)
+**Features:**
+- **Main Prompt Field** - Your standard greeting that never changes
+- **Context Cells** - Organize handoffs, research notes, sprint status
+- **Multi-Project Support** - Separate contexts for different projects
+- **One-Click Copy** - Select relevant cells and copy to clipboard
+- **Persistent Storage** - Never lose your carefully crafted context
+
+**How It Replaces Text Files:**
+- No more multiple notepad windows
+- No more copy/paste gymnastics
+- No more lost context between sessions
+- Visual organization of your handoff materials
+
+### Option 3: Full Integration with Claude Code
+
+**Setup:**
+1. Install Context Curator app
+2. Create `/project/templates/HANDOFF_TEMPLATE.md` in your project
+3. Add handoff command to Claude (see below)
+4. Use `/handoff` command at session end
+
+**Claude Code Handoff Command:**
+Create `.claude/commands/handoff.md`:
+```markdown
+Please create a session handoff document using the template at 
+project/templates/HANDOFF_TEMPLATE.md. Focus on: $ARGUMENTS
+
+Save it to project/handoffs/ with today's date.
+```
+
+## Why This Works
+
+### Context Window Economics
+- Starting with full context uses ~5-10% of window
+- But saves 30-40% by avoiding re-explanation
+- Leave 20% buffer for handoff generation
+- Never pivot after 50% - quality degrades
+
+### The Power of Warm Starts
+Cold start (no context):
+```
+You: "Help me fix the scoring bug"
+AI: "What technology stack? What's the bug? Can you show me code?"
+[Wastes 20+ messages establishing context]
+```
+
+Warm start (with handoff):
+```
+You: [Paste context + handoff]
+AI: "I see the scoring issue from yesterday's session. The problem is in 
+     calculateScore() where the multiplier isn't applied. Let me continue 
+     where we left off..."
+[Immediately productive]
+```
+
+### Sprint.md as Source of Truth
+Example sprint.md:
+```markdown
+# Current Sprint: Event System Refactor
+
+## In Progress
+- [ ] Fix scoring calculation bug (see handoff 20250829)
+- [ ] Refactor event listener architecture
+
+## Blocked
+- [ ] Payment integration - waiting for API keys
+
+## Completed
+- [x] Database migration to PostgreSQL
+- [x] Setup theater classification pipeline
+```
+
+## Real-World Example
+
+Here's an actual handoff from my project:
+
+```markdown
+# Session Handoff: V3 Refactor Complete
+
+**Created**: 2025-08-30 09:45 AM
+**Context Window**: 65% - Approaching limit
+**Focus**: Bug fixes and GitHub Actions setup
+
+## 🎯 Critical Context
+Successfully completed v3 refactor with modular architecture. All UI bugs fixed,
+GitHub Actions now automatically building releases for all platforms.
+
+## ✅ What Was Accomplished
+- Fixed save button persistence issue (ui.js:500-510)  
+- Resolved false error notifications on project creation
+- Implemented GitHub Actions CI/CD with automated releases
+- Updated build configuration for cross-platform support
+
+## 🚧 Current Working State
+- ✅ All critical bugs fixed
+- ✅ Automated builds working
+- ⏳ Optional: Dark mode (not started)
+
+## 🚨 Next Immediate Steps
+1. Monitor GitHub Actions for any build failures
+2. Consider implementing export/import JSON feature
+3. User requested drag-drop reordering for cells
+
+## 📁 Files Modified
+- `src/ui.js` - Fixed save button and notification bugs
+- `.github/workflows/build-release.yml` - Complete CI/CD setup
+- `README.md` - Simplified to reflect actual purpose
+```
+
+## Getting Started
+
+### Quick Start (Just Try It)
+1. Download [Context Curator](https://github.com/Norsninja/ai-context-curator/releases/latest)
+2. Copy the [handoff template](project/templates/HANDOFF_TEMPLATE.md)
+3. Start your next AI session with structure
+
+### Full Adoption
+1. Create project structure (handoffs/, templates/, sprint.md)
+2. Write your MAIN_PROMPT.md with collaboration guidelines
+3. Install Context Curator for managing multiple projects
+4. Configure Claude Code with /handoff command
+5. Commit handoffs to git for team sharing
 
 ## Installation
 
-### Download (Easiest)
-Get the latest executable from [Releases](https://github.com/Norsninja/ai-context-curator/releases) - just download and run.
+### Context Curator App
 
-### Build from source
+**Download:** Get the latest from [Releases](https://github.com/Norsninja/ai-context-curator/releases)
+
+**Build from source:**
 ```bash
 git clone https://github.com/Norsninja/ai-context-curator.git
 cd ai-context-curator
@@ -42,101 +222,35 @@ npm install
 npm start
 ```
 
-## Usage Example
-
-**Main Prompt:**
-```
-Hi! Please review the handoff context first.
-You're a valued team member, be methodical.
-Let's discuss what you learn before diving in.
-```
-
-**Cell 1 - Project Status:**
-```
-Building news aggregator with PostgreSQL
-✅ RSS feeds working (40k articles)
-🚧 Working on theater classification
-📊 System 99% complete
-```
-
-**Cell 2 - Session Handoff:**
-```
-Last session: Implemented heat calculation
-Issue: Pipeline step 5.6 not executing
-Check: src/services/theater-heat.ts
-Next: Debug pipeline integration
-```
-
-Select both → Copy → Paste in AI chat → Full context restored!
-
-## Features
-
-- **Multi-project** - Keep different projects separate
-- **Auto-save** - Never lose your context
-- **Collapsed view** - See everything at a glance
-- **Keyboard shortcuts** - Enter to save, Escape to cancel
-- **Local storage** - Your data stays on your machine
-
-## The Handoff Workflow
-
-This tool is part of a comprehensive handoff system for AI collaboration. Here's how it works:
-
-### 1. The Handoff Template
-Each project has a standardized handoff template (`project/templates/HANDOFF_TEMPLATE.md`) that captures:
-- Critical context and current status
-- What was accomplished vs what's in progress
-- Known issues and next steps
-- Technical details and file changes
-- Progress metrics and session notes
-
-### 2. Claude Code Integration
-When ending a session, use the `/handoff` command in Claude Code to:
-- Generate a structured handoff document from the template
-- Automatically capture session context and accomplishments
-- Save it to your `project/handoffs/` directory with timestamp
-
-### 3. Context Curator Workflow
-1. **Main Prompt**: Your standard AI greeting and collaboration guidelines
-2. **Handoff Cell**: Paste the latest handoff for immediate context
-3. **Supporting Cells**: Add project status, research notes, or specific focus areas
-4. **Copy & Start**: Select relevant cells and paste to begin with full context
-
-### Example Session Flow
-```
-Morning Session:
-├── Start with Context Curator → Copy main prompt + yesterday's handoff
-├── Work with Claude on feature implementation
-├── End with `/handoff` command → Creates HANDOFF_20250830_FeatureComplete.md
-└── Save handoff to Context Curator for tomorrow
-
-Next Session:
-├── Open Context Curator → Previous handoff ready
-├── Copy context → Paste to Claude
-└── Claude immediately understands where you left off
-```
-
-This creates seamless continuity across sessions, ensuring no context is lost and every session builds on the previous work.
-
-## Why This Exists
-
-After losing context repeatedly between AI sessions, I built this to maintain continuity. It's basically a clipboard manager optimized for AI session management, designed to work hand-in-hand with structured handoffs.
-
-## Data Location
-
+**Data Location:**
 - **Windows**: `%APPDATA%/AI Context Curator/`
 - **Mac**: `~/Library/Application Support/AI Context Curator/`
 - **Linux**: `~/.config/AI Context Curator/`
 
-Your data persists across app updates.
+## FAQ
+
+**Q: Why not use a vector database or RAG system?**
+A: Structured handoffs beat unstructured memories. The overhead of maintaining a "smart" system usually exceeds the benefits. Simple files + good process > complex systems.
+
+**Q: Can I use this with ChatGPT/Gemini/other AIs?**
+A: Yes! The methodology is AI-agnostic. The `/handoff` command is Claude-specific but you can manually create handoffs for any AI.
+
+**Q: How do you handle very long projects?**
+A: Old handoffs become research documents. Recent handoffs (last 3-5 sessions) stay in Context Curator. The sprint.md maintains overall project state.
+
+**Q: What if I forget to make a handoff?**
+A: The AI will remind you when context window approaches 80%. But make it a habit - it only takes 2 minutes and saves hours of confusion.
 
 ## Contributing
 
-This is a personal tool shared with the community. Feel free to fork and adapt to your workflow.
+This methodology emerged from real-world AI collaboration pain. If you have improvements or adaptations, please share them. The tool is MIT licensed - fork and adapt freely.
 
-## License
+## Philosophy
 
-MIT - Use freely
+> "Memory without structure is just noise. The protocol matters more than the platform."
+
+The best system is one you'll actually use. This methodology is deliberately simple because simplicity drives adoption. The Context Curator app is just one implementation - the principles work with any tools.
 
 ---
 
-*Built for developers who value simple, focused tools.*
+*Built for developers who collaborate with AI and value continuity over complexity.*

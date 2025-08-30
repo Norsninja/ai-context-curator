@@ -1,6 +1,10 @@
-# The Handoff Methodology for AI Collaboration
+# AI Context Curator
 
-> A systematic approach to maintaining context and continuity across AI coding sessions, with tools to support the workflow.
+> A custom clipboard manager for AI sessions + a methodology for maintaining context between conversations
+
+**The App:** Context Curator is a specialized copy-paste tool that organizes your AI session materials - main prompts, handoffs, research notes - and lets you copy them in one click to start AI conversations with full context.
+
+**The Method:** Part of a simple but effective methodology for AI collaboration using structured handoffs that ensure continuity between sessions.
 
 <div align="center">
   
@@ -66,12 +70,11 @@ your-project/
 │   │   └── HANDOFF_20250829_BugFixSession.md
 │   └── templates/
 │       └── HANDOFF_TEMPLATE.md
-├── sprint.md         # Current tasks and priorities
-└── MAIN_PROMPT.md    # Your standard AI greeting
+└── sprint.md         # Current tasks and priorities
 ```
 
 **Workflow:**
-1. Start each session by copying MAIN_PROMPT.md + latest handoff
+1. Start each session by copying your main prompt + latest handoff
 2. Paste into AI chat
 3. Work through your sprint.md tasks
 4. Before context window fills, create new handoff
@@ -203,7 +206,7 @@ GitHub Actions now automatically building releases for all platforms.
 
 ### Full Adoption
 1. Create project structure (handoffs/, templates/, sprint.md)
-2. Write your MAIN_PROMPT.md with collaboration guidelines
+2. Define your main prompt with collaboration guidelines (store in Context Curator)
 3. Install Context Curator for managing multiple projects
 4. Configure Claude Code with /handoff command
 5. Commit handoffs to git for team sharing

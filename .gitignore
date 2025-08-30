@@ -35,3 +35,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Personal data files
+default-data.json
+curator-data.json

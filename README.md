@@ -2,6 +2,13 @@
 
 A lightweight Electron clipboard manager designed specifically for maintaining context between AI coding sessions. Perfect for developers who work with AI assistants and need to preserve important context, code snippets, and project notes across conversations.
 
+<div align="center">
+  
+### [⬇️ Download Latest Release](https://github.com/Norsninja/ai-context-curator/releases/latest)
+**Available for Windows, Mac, and Linux**
+
+</div>
+
 ## What It Does
 
 This tool helps you:
@@ -23,16 +30,54 @@ This tool helps you:
 
 ## Installation
 
+### Option 1: Download Pre-built Release (Easiest) 🎯
+**No coding required!** Just download and run:
+
+1. Go to [**Releases**](https://github.com/Norsninja/ai-context-curator/releases)
+2. Download for your system:
+   - **Windows**: `AI.Context.Curator.Setup.exe` (installer) or `AI.Context.Curator.exe` (portable)
+   - **Mac**: `AI.Context.Curator.dmg`
+   - **Linux**: `AI.Context.Curator.AppImage`
+3. Double-click to run - that's it!
+
+### Option 2: Build From Source
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/context-manager.git
-cd context-manager
+git clone https://github.com/Norsninja/ai-context-curator.git
+cd ai-context-curator
 
 # Install dependencies
 npm install
 
-# Start the application
+# Run in development mode
 npm start
+
+# Or build your own executable
+npm run dist
+```
+
+### Option 3: Build With Your Data Pre-loaded
+```bash
+# Copy your existing data (if you have any)
+cp ~/.config/context-manager/curator-data.json ./default-data.json
+
+# Build with your data included
+npm run dist
+
+# Your exe will now start with your projects pre-loaded!
+```
+
+### Building on WSL for Windows
+If you're using WSL and want to build for Windows:
+```bash
+# Install electron-builder
+npm install --save-dev electron-builder
+
+# Build Windows executable from WSL
+npm run dist-win
+
+# Find your exe in dist/ folder
+ls dist/*.exe
 ```
 
 ## Usage

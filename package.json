@@ -1,15 +1,53 @@
 {
   "name": "ai-context-curator",
-  "version": "1.0.0",
-  "description": "Visual context curator for AI coding sessions",
+  "version": "3.0.0",
+  "description": "Lightweight clipboard manager for AI coding sessions",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist-win": "electron-builder --win",
+    "dist-mac": "electron-builder --mac",
+    "dist-linux": "electron-builder --linux"
   },
-  "keywords": ["electron", "context", "ai", "productivity"],
-  "author": "",
+  "keywords": [
+    "electron",
+    "context",
+    "ai",
+    "productivity",
+    "clipboard"
+  ],
+  "author": "Norsninja",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^32.0.0"
+    "electron": "^32.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.norsninja.contextcurator",
+    "productName": "AI Context Curator",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!handoffs{,/**/*}",
+      "!dist{,/**/*}",
+      "!.git{,/**/*}",
+      "!**/*.md",
+      "README.md"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Development"
+    }
   }
 }

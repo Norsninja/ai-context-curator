@@ -175,7 +175,7 @@ class UIRenderer {
       }
       
       parent.replaceChild(selector, input);
-      this.updateProjectSelector();
+      // Don't call updateProjectSelector here - it's already called by the event listener
     };
 
     input.addEventListener('keydown', (e) => {
@@ -292,7 +292,7 @@ class UIRenderer {
     saveBtn.className = 'save-btn';
     saveBtn.onclick = () => {
       this.store.updateMainPrompt(textarea.value);
-      this.updateMainPrompt();
+      this.updateMainPrompt();  // This already restores the display
       window.utils.showNotification('Main prompt saved', 'success');
     };
 
@@ -499,6 +499,13 @@ class UIRenderer {
     saveBtn.className = 'save-btn';
     saveBtn.onclick = () => {
       this.store.updateCell(cellId, { content: textarea.value });
+      // Restore normal display immediately
+      const updatedContent = textarea.value || 'Click to add content...';
+      contentDiv.innerHTML = '';
+      const displayDiv = document.createElement('div');
+      displayDiv.className = 'cell-content-display';
+      displayDiv.textContent = updatedContent;
+      contentDiv.appendChild(displayDiv);
       window.utils.showNotification('Cell content saved', 'success');
     };
 

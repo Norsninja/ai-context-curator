@@ -8,25 +8,25 @@
 <body>
   <div class="container">
     <header>
-      <div style="display: flex; align-items: center; gap: 5px;">
-        <select id="project-selector" style="flex: 1;">
-          <!-- Projects will be populated by JavaScript -->
+      <div class="project-controls">
+        <select id="project-selector">
+          <!-- Projects populated by JavaScript -->
         </select>
-        <button onclick="deleteProject()" title="Delete Current Project" style="padding: 6px 10px; font-size: 14px;">🗑</button>
+        <button id="delete-project-btn" class="icon-btn" title="Delete Current Project">🗑</button>
       </div>
-      <div style="margin-top: 5px;">
-        <button onclick="expandAll()" style="padding: 4px 8px; font-size: 12px;">Expand All</button>
-        <button onclick="collapseAll()" style="padding: 4px 8px; font-size: 12px;">Collapse All</button>
+      <div class="view-controls">
+        <button id="expand-all-btn" class="small-btn">Expand All</button>
+        <button id="collapse-all-btn" class="small-btn">Collapse All</button>
       </div>
     </header>
 
     <div class="cells-container">
       <div class="cell main-prompt-cell" id="main-prompt-cell">
         <div class="cell-header">
-          <button class="collapse-btn" onclick="toggleMainPrompt()">▼</button>
+          <button class="collapse-btn">▼</button>
           <input type="checkbox" id="main-checkbox" checked>
           <span class="cell-title">📌 MAIN PROMPT (pinned)</span>
-          <span class="cell-preview" id="main-prompt-preview" style="display: none;"></span>
+          <span class="cell-preview" id="main-prompt-preview"></span>
         </div>
         <div class="cell-body" id="main-prompt-body">
           <div class="cell-content" id="main-prompt-content">
@@ -39,12 +39,16 @@
     </div>
 
     <div class="controls">
-      <button id="add-cell-btn">+ Add Cell</button>
-      <button id="copy-btn">Copy Selected</button>
-      <button id="clear-btn">Clear Selection</button>
+      <button id="add-cell-btn" class="primary-btn">+ Add Cell</button>
+      <button id="copy-btn" class="success-btn">Copy Selected</button>
+      <button id="clear-btn" class="secondary-btn">Clear Selection</button>
     </div>
   </div>
 
-  <script src="renderer-v2.js"></script>
+  <!-- Load modules in order -->
+  <script src="src/utils.js"></script>
+  <script src="src/store.js"></script>
+  <script src="src/ui.js"></script>
+  <script src="src/app.js"></script>
 </body>
 </html>
